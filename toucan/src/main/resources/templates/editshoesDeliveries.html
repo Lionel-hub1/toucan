@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Clothes For Sale</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >
+        <style>
+                @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
+
+                *, body {
+                    font-family: 'Poppins', sans-serif;
+                    font-weight: 400;
+                    -webkit-font-smoothing: antialiased;
+                    text-rendering: optimizeLegibility;
+                    -moz-osx-font-smoothing: grayscale;
+                }
+                main {
+                    font-family: 'Rubik', sans-serif;
+                    font-size: 14px;
+                    font-weight: 400;
+                    background: #E0E0E0;
+                    color: #000000;
+                    padding-bottom: 100vh;
+                    display: flex;
+                    justify-content: center;
+                }
+
+                ul {
+                    list-style: none;
+                    margin-bottom: 0px
+                }
+
+                .button {
+                    display: inline-block;
+                    background: #0e8ce4;
+                    border-radius: 5px;
+                    height: 48px;
+                    -webkit-transition: all 200ms ease;
+                    -moz-transition: all 200ms ease;
+                    -ms-transition: all 200ms ease;
+                    -o-transition: all 200ms ease;
+                    transition: all 200ms ease
+                }
+
+                .button a {
+                    display: block;
+                    font-size: 18px;
+                    font-weight: 400;
+                    line-height: 48px;
+                    color: #FFFFFF;
+                    padding-left: 35px;
+                    padding-right: 35px
+                }
+
+                .button:hover {
+                    opacity: 0.8
+                }
+
+                .cart_section {
+                    width: 100%;
+                    padding-top: 30px;
+                    padding-bottom: 111px
+                }
+
+                .cart_title {
+                    font-size: 30px;
+                    font-weight: 500
+                }
+
+                .cart_items {
+                    margin-top: 8px
+                }
+
+                .cart_list {
+                    border: solid 1px #e8e8e8;
+                    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+                    background-color: #fff
+                }
+
+                .cart_item {
+                    width: 100%;
+                    padding: 15px;
+                    padding-right: 46px
+                }
+
+                .cart_item_image {
+                    width: 133px;
+                    height: 133px;
+                    float: left
+                }
+
+                .cart_item_image img {
+                    max-width: 100%
+                }
+
+                .cart_item_info {
+                    width: calc(100% - 133px);
+                    float: left;
+                    padding-top: 18px
+                }
+
+                .cart_item_name {
+                    margin-left: 7.53%
+                }
+
+                .cart_item_title {
+                    font-size: 14px;
+                    font-weight: 400;
+                    color: rgba(0, 0, 0, 0.5)
+                }
+
+                .cart_item_text {
+                    font-size: 18px;
+                    margin-top: 35px
+                }
+
+                .cart_item_text span {
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    margin-right: 11px;
+                    -webkit-transform: translateY(4px);
+                    -moz-transform: translateY(4px);
+                    -ms-transform: translateY(4px);
+                    -o-transform: translateY(4px);
+                    transform: translateY(4px)
+                }
+
+                .cart_item_price {
+                    text-align: right
+                }
+
+                .cart_item_total {
+                    text-align: right
+                }
+
+                .cart_buttons {
+                    margin-top: 60px;
+                    text-align: right
+                }
+
+                .cart_button_clear {
+                    display: inline-block;
+                    border: none;
+                    font-size: 18px;
+                    font-weight: 400;
+                    line-height: 48px;
+                    color: rgba(0, 0, 0, 0.5);
+                    background: #FFFFFF;
+                    border: solid 1px #b2b2b2;
+                    padding-left: 35px;
+                    padding-right: 35px;
+                    outline: none;
+                    cursor: pointer;
+                    margin-right: 26px
+                }
+
+                .cart_button_clear:hover {
+                    border-color: #0e8ce4;
+                    color: #0e8ce4
+                }
+
+                .cart_button_checkout {
+                    display: inline-block;
+                    border: none;
+                    font-size: 18px;
+                    font-weight: 400;
+                    line-height: 48px;
+                    color: #FFFFFF;
+                    padding-left: 35px;
+                    padding-right: 35px;
+                    outline: none;
+                    cursor: pointer;
+                    vertical-align: top
+                }
+
+                .topest{
+                    height: 80px;
+                    display: flex;
+                    background: rgb(218, 226, 112);
+                    justify-content: space-between;
+                    flex-direction: row;
+                }
+                .topitem{
+                    display:inline-block;
+                }
+                .logoutbtn {
+                    margin-right: 10px;
+                    margin-top: 20px;
+                }
+                .nav-item:hover{
+                    transition: 3s;
+                    text-decoration-line: underline;
+                    text-decoration-thickness: 3px;
+                    color: white;
+                }
+                .active{
+                    text-decoration-line: underline;
+                    text-decoration-thickness: 3px;
+                    color: rgb(218, 226, 112);
+                }
+                a#navbarDropdown {
+                    font-weight: 900;
+                    color: rgb(99, 187, 167);
+                    font-size: large;
+                    display: inline-block;
+                    border: none;
+                    padding-left: 20px;
+                    padding-right: 20px;
+                    outline: none;
+                    cursor: pointer;
+                    vertical-align: top
+                }
+                .navbar-dark .navbar-nav .nav-link.active {
+                    color: rgb(99, 187, 167);
+                }
+                .btn-info {
+                    color: #000;
+                    background-color: rgb(99, 187, 167);
+                    border-color: rgb(99, 187, 167);
+                }
+                .inputs {
+                    position: relative
+                }
+                .inputs i {
+                    position: absolute;
+                    top: 11px;
+                    right: 14px;
+                    color: rgb(99, 187, 167);
+                    cursor: pointer;
+                }
+
+            </style>
+    </head>
+    <body>
+    <div class="container-fluid topest">
+        <div class="topitem">
+            <div class="mt-3 inputs"> <i class="fa fa-search"></i> <input type="text" class="form-control " placeholder="Search products ..."> </div>
+        </div>
+        <div class="topitem">
+            <img th:src="@{img/topt.png}" style="height: 100%;" alt=""/>
+        </div>
+
+        <div class="topitem logoutbtn">
+            <form  th:action="@{/logout}" method="post">
+                <input type="submit" class="btn btn-info" value="Logout" />
+            </form>
+        </div>
+    </div>
+    <nav class="container-fluid navbar navbar-expand-lg navbar-dark bg-dark sticky-top" style="background-color: black;">
+        <div class="container-fluid" style="display:flex;justify-content: space-between;flex-direction: row;">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse topitem" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center" >
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#">Go Back to: </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/displayShoesDeliveries}">Shoes Deliveries</a>
+                    </li>
+
+                </ul>
+                <li class="nav-item dropdown" style="margin-right: 20px;">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Import
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#clothesModal">Clothes</a></li>
+                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#shoesModal" >Shoes</a></li>
+                    </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container-fluid">
+        <h1 class="text-center">Edit Shoes Deliveries</h1>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>
+</html>
